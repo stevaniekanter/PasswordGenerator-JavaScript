@@ -38,7 +38,7 @@ function generatePassword () {
   let randomArray = [];
   let password = '';
 
-// prompt for lenght of password desidre 
+// prompt for lenght of password desire 
 let passLength = parseInt(prompt('Enter the length of the password desired (Min: 8 and Max: 128)'));
 // alert that tells warns user to try again if it's less than 8 and greater than 128 characters 
   if (passLength < 8 || passLength > 128 || isNaN(+passLength))
@@ -48,6 +48,45 @@ let passLength = parseInt(prompt('Enter the length of the password desired (Min:
     return 'Please try again!';
 
     }
+
+// prompt box for password criteria
+    let confirmSpecialChar = confirm("Do you want special characters? Click 'OK' for Yes or 'Cancel' for No");
+    let confirmLowerCase = confirm("Do you want lower case characters? Click 'OK' for Yes or 'Cancel' for No");
+    let confirmUpperCase = confirm("Do you want upper case characters? Click 'OK' for Yes or 'Cancel' for No");
+    let confirmNumChar = confirm("Do you want numeric characters? Click 'OK' for Yes or 'Cancel' for No");
+// alert is generated to try again if they don't select at least one option 
+  if ( !confirmSpecialChar && !confirmLowerCase && !confirmUpperCase && !confirmNumChar)
+  {
+
+    alert("Please try again. You must select at least one password criteria");
+
+    return 'Please try again';
+  }
+// true or false respons to the prompts then code will read from which random arrays to choose from or not choose from
+  if (confirmSpecialChar)
+  { randomArray = randomArray.concat(specialChar)
+  }
+
+  if (confirmLowerCase) 
+  {randomArray = randomArray.concat(lowerCasedChar)
+  }
+
+  if (confirmUpperCase)
+  { randomArray = randomArray.concat(upperCasedChar)
+  }
+
+  if (confirmNumChar)
+  { randomArray = randomArray.concat(numericChar)
+  }
+
+// Generates code based on the length of desired password from the first prompt 
+  for (var i = 0; i < passLength; i++) {
+    var numero = Math.floor(Math.random() * randomArray.length);
+    password += randomArray[numero]
+  }
+
+  return password;
+}
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
