@@ -37,5 +37,17 @@ function generatePassword () {
 
   let randomArray = [];
   let password = '';
+
+// prompt for lenght of password desidre 
+let passLength = parseInt(prompt('Enter the length of the password desired (Min: 8 and Max: 128)'));
+// alert that tells warns user to try again if it's less than 8 and greater than 128 characters 
+  if (passLength < 8 || passLength > 128 || isNaN(+passLength))
+    {
+    alert('Please try again! Password length does not meet the minimum of 8 and maximum of 128 characters');
+
+    return 'Please try again!';
+
+    }
+
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
